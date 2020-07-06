@@ -1,0 +1,69 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+    <!-- 부모 servlet-->
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </context-param>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>lake.pool.AppConfig</param-value>
+    </context-param>
+
+    <!--    <listener>-->
+    <!--        <listener-class>lake.pool.MyListener</listener-class>-->
+    <!--    </listener>-->
+<!--    서브릿 라이프사이클에 맞춰서 applicationContext를 만들어서 servletContext에 등록및 제거해줌-->
+<!--    스플링 설정파일을 통해서 applicationContext를 설정해줘야한다-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+<!--    <filter>-->
+<!--        <filter-name>myFilter</filter-name>-->
+<!--        <filter-class>lake.pool.MyFilter</filter-class>-->
+<!--    </filter>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>myFilter</filter-name>-->
+<!--        <servlet-name>hello</servlet-name>-->
+<!--&lt;!&ndash;        <url-pattern>*.do</url-pattern>&ndash;&gt;-->
+<!--    </filter-mapping>-->
+
+    <!-- 커스텀 servlet -->
+<!--    <servlet>-->
+<!--        <servlet-name>hello</servlet-name>-->
+<!--        <servlet-class>lake.pool.HelloServlet</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>hello</servlet-name>-->
+<!--        <url-pattern>/hello</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+    <!--
+    spring에서 제공해주는 servlet
+    DispatcherServlet : mvc를 사용하기 위해 ( 핸들러 디스패치해줌, annotation을 사용가능, http request/respose 만들어줌 )
+    -->
+    <!-- 자식 servlet-->
+    <servlet>
+        <servlet-nmae>app</servlet-nmae>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextClass</param-name>
+            <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+        </init-param>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>lake.pool.WebConfig</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>app</servlet-name>
+        <url-pattern>/app/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>
+W
